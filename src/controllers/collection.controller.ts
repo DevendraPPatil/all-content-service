@@ -7,12 +7,14 @@ import {
   Param,
   Post,
   Put,
+  Query,
   Res,
 } from '@nestjs/common';
 import { collection } from 'src/schemas/collection.schema';
 import { CollectionService } from 'src/services/collection.service';
 import { FastifyReply } from 'fastify';
 import { ApiTags } from '@nestjs/swagger';
+import { Collection } from 'mongoose';
 
 @ApiTags('collection')
 @Controller('collection')
@@ -90,5 +92,13 @@ export class CollectionController {
     return response.status(HttpStatus.OK).send({
       deleted,
     });
+  }
+
+  @Get('/search')
+  async searchUsers(@Query('q') query: string): Promise<Collection[]> {
+    if (!query) {
+      return [];
+    }
+    return this.CollectionService.searchUsers(query);
   }
 }

@@ -65,4 +65,13 @@ export class CollectionService {
       status: 200,
     };
   }
+
+  async searchUsers(keyword: string): Promise<any> {
+    const regex = new RegExp(keyword, 'i'); // Case-insensitive search
+    return this.collectionModel
+      .find({
+        $or: [{ name: regex }],
+      })
+      .exec();
+  }
 }
