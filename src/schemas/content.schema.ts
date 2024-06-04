@@ -5,10 +5,10 @@ import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 @Schema({ collection: 'content' })
 export class content {
-  @Prop({ default: uuidv4 })
+  @Prop({ default: uuidv4, index:true })
   contentId: string;
 
-  @Prop({ type: String, required: false })
+  @Prop({ type: String, required: false, index:true })
   @IsOptional()
   @IsString()
   collectionId: string;
@@ -18,7 +18,7 @@ export class content {
   @IsString()
   name: string;
 
-  @Prop({ type: String, required: true })
+  @Prop({ type: String, required: true, index:true })
   @IsString()
   contentType: string;
 
@@ -64,7 +64,7 @@ export class content {
   @IsString()
   publisher: string;
 
-  @Prop({ type: String, required: true })
+  @Prop({ type: String, required: true, index:true })
   @IsString()
   language: string;
 
@@ -73,10 +73,10 @@ export class content {
   @IsNumber()
   contentIndex: number;
 
-  @Prop({ required: true })
+  @Prop({ required: true, index:true })
   tags: [string];
 
-  @Prop({ default: now() })
+  @Prop({ default: now(), index:true })
   createdAt: Date;
 
   @Prop({ default: now() })
